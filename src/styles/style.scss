@@ -1,7 +1,29 @@
-$color-red : rgb(0, 255, 38);
+$color-red: rgb(0, 255, 38);
+$ship: #41acff;
 
-h1{
-    color: $color-red
+h1 {
+  color: $color-red;
 }
-.boards{
+
+.boards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.machineBoard,
+.humanBoard {
+    display: grid;
+    grid-template-columns: repeat(10,35px);
+}
+
+.grid {
+    height: 30px;
+    border: 1px solid gray;
+    
+}
+
+.ship{
+    background-color: $ship;
 }
