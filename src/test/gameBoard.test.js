@@ -27,7 +27,7 @@ describe("", () => {
   it("", () => {
     expect(newBoard.receiveAttack(0)).toBe(true);
   });
-  
+
   it("", () => {
     expect(newBoard.receiveAttack(10)).toBe(true);
   });
@@ -42,7 +42,13 @@ describe("", () => {
     expect(newBoard.receiveAttack(22)).toBe(true);
   });
 
+  it("place a third ship", () => {
+    expect(newBoard.placeShip([80, 81, 82, 83], "battleship")).toContain(
+      "battleship"
+    );
+  });
+
   it("", () => {
-    expect(newBoard.allSunk()).toBe(true);
+    expect(newBoard.allSunk()).toBe(false);
   });
 });
