@@ -1,4 +1,5 @@
-const Ship = require("./ship");
+// const Ship = require("./ship");
+import {Ship} from "./ship.js";
 
 function gameBoard() {
   const board = [];
@@ -43,10 +44,11 @@ function gameBoard() {
   };
 
   const allSunk = () => {
-    return allShips.every((ship) => ship.isSunk());        
-  }; 
+    return allShips.every((ship) => ship.isSunk());
+  };
 
   return { board, placeShip, verifySpace, receiveAttack, allSunk };
 }
 
-module.exports = gameBoard;
+
+export {gameBoard};

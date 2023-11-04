@@ -20,4 +20,5 @@ function Ship (length, name) {
   return { name, length, hit , isSunk, countOfHits };
 }
 
-module.exports = Ship; 
+// module.exports = Ship; 
+export { Ship };
