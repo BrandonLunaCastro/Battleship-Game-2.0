@@ -5,7 +5,7 @@ function gameBoard() {
   const board = [];
   const allShips = [];
   const attackFailed = [];
-
+  const coordinateShips = [];
   // create gameBoard on the memory
   for (let i = 0; i < 100; i++) {
     board.push(null);
@@ -19,6 +19,7 @@ function gameBoard() {
       allShips.push(newShip);
       for (const coord of coordinates) {
         board[coord] = newShip.name;
+        coordinateShips.push(coord);
       }
       return board;
     } else {
@@ -47,7 +48,7 @@ function gameBoard() {
     return allShips.every((ship) => ship.isSunk());
   };
 
-  return { board, placeShip, verifySpace, receiveAttack, allSunk };
+  return { board, coordinateShips, placeShip, verifySpace, receiveAttack, allSunk };
 }
 
 
