@@ -1,5 +1,5 @@
 $color-red: rgb(0, 255, 38);
-$ship: #41acff;
+$ship: #6c6c6c;
 
 h1 {
   color: $color-red;
@@ -26,4 +26,12 @@ h1 {
 
 .ship{
     background-color: $ship;
+}
+
+.hit {
+  background-color:  red;  
+}
+
+.fail {
+  background-color: #0093aa
 }
