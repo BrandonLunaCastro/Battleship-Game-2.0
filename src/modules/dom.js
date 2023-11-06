@@ -19,46 +19,26 @@ function dom() {
 
   const verifyIsSunk = (board, player) => {
     if (board.allSunk()) {
-      console.log(`the winner is ${player}`);
+      document.querySelector(".modal").classList.remove("is-close");
+      document.querySelector(".winner").textContent = `the winner is ${player}`;
     };
   };
 
-  const attackAI = (e) => {
+  const stateAttack = (target, attack, board, player) => {
+    if (attack === "already attacked") console.log("try again, this coordinate already been attacked");
+    if (attack) {
+      target.classList.add("hit");
+      verifyIsSunk(board, player.name);
+    } else {
+      target.classList.add("fail");
+      verifyIsSunk(board, player.name);
+    };      
+  };  
 
+  function showTurn(player) {
+    document.querySelector(".turn").textContent = `Turn of player: ${player}`;
   }
-
-  const stateOfAttack = () => {
-    
-  }
-
-  const attackShip = (reference, board, player) => {
-    document.querySelector(reference).addEventListener("click", e => {
-      if (!e.target.matches(".grid"))return false;
-      
-      console.log( e.target.dataset.coordinate);
-      const coordinate = parseInt(e.target.dataset.coordinate);
-      const stateAttack = board.receiveAttack(coordinate);
-
-      if (stateAttack === "already attacked") console.log("try again, this coordinate already been attacked");
-      if (stateAttack) {
-        e.target.classList.add("hit");
-        verifyIsSunk(board, player);
-      } else {
-        e.target.classList.add("fail");
-        verifyIsSunk(board, player);
-      };
-
-    });
-  };
-
-  const turnOf = (player) => {
-    const turnOfPlayer = player.id === 1 ? "human" : "machine";
-    document.querySelector(".turn").textContent =`Turn of : ${turnOfPlayer}`;
-    if (turnOfPlayer === "human")
-  };
-
-  return {createBoard, drawShips, attackShip, turnOf};
-
+  return {createBoard, drawShips, stateAttack, showTurn};
 }
 
 export { dom };
