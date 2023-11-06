@@ -11,8 +11,6 @@ export default function gameLoop() {
 
   const domMethods = dom();
 
-  let turnOfPlayer = playerMachine;
-
   humanBoard.placeShip([20,21,22,23,24], "carrier");
   humanBoard.placeShip([40,50,60,70], "battleship");
   humanBoard.placeShip([65,66,67], "destroyer");
@@ -36,7 +34,32 @@ export default function gameLoop() {
   // draw correctly ships on the game board
   domMethods.drawShips(coordinateShipsHuman, playerOne);
   domMethods.drawShips(coordinateShipsMachine, playerMachine);
-
-  domMethods.attackShip(".machineBoard", machineBoard, playerOne.name);
+  domMethods.showTurn(playerOne.name);
   
+  (function playGame(){  
+    const attackAI = () => {
+      const randomCoordinate = playerMachine.attackAI();
+      const grid = document.querySelector(`.human[data-coordinate="${randomCoordinate}"]`);
+      const attackHuman = humanBoard.receiveAttack(randomCoordinate);
+      domMethods.stateAttack(grid, attackHuman, humanBoard, playerMachine);
+      domMethods.showTurn(playerOne.name);
+    };
+
+    boardTwo.addEventListener("click", e => {
+      if (!e.target.matches(".grid"))return false;  
+      const coordinate = parseInt(e.target.dataset.coordinate);
+      const attack = machineBoard.receiveAttack(coordinate);
+
+      domMethods.stateAttack(e.target, attack, machineBoard, playerOne);    
+      domMethods.showTurn(playerMachine.name);
+
+      const currentTarget = e.currentTarget;
+      currentTarget.classList.add("disabled");
+      setTimeout(() => {
+        attackAI();
+        currentTarget.classList.remove("disabled");
+      }, 1000);
+    });
+  })();
+
 };
