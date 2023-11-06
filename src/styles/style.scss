@@ -18,10 +18,13 @@ h1 {
     grid-template-columns: repeat(10,35px);
 }
 
+.disabled{
+  pointer-events: none;
+}
+
 .grid {
-    height: 30px;
-    border: 1px solid gray;
-    
+  height: 30px;
+  border: 1px solid gray;
 }
 
 .ship{
@@ -34,4 +37,27 @@ h1 {
 
 .fail {
   background-color: #0093aa
+}
+
+.modal{
+  display: flex;
+  padding: 15px;
+  position: absolute;
+  width: 100%;
+  right: 0;
+  left: 0;
+  background-color: rgb(240, 248, 255);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  top: 40%;
+  box-shadow: 4px 4px 9px rgb(159, 159, 159);
+  button{
+    width: 100px;
+  }
+}
+
+.is-close{
+  display: none;
 }
