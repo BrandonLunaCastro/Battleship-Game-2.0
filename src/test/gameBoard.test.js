@@ -1,4 +1,5 @@
-const gameBoard = require("../modules/gameBoard.js");
+
+import { gameBoard } from "../modules/gameBoard";
 
 const newBoard = gameBoard();
 
@@ -50,5 +51,21 @@ describe("", () => {
 
   it("", () => {
     expect(newBoard.allSunk()).toBe(false);
+  });
+});
+
+describe("", () => {
+  it("attack double ", () => {
+    expect(newBoard.receiveAttack(80)).toBe(true);
+  });
+  it("attack double 2", () => {
+    expect(newBoard.receiveAttack(80)).toBe("already attacked");
+  });
+
+  it("attack double failed", () => {
+    expect(newBoard.receiveAttack(85)).toBe(false);
+  });
+  it("attack double failed 2", () => {
+    expect(newBoard.receiveAttack(85)).toBe("already attacked");
   });
 });
