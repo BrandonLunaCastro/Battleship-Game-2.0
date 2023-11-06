@@ -1,4 +1,4 @@
-function Player(name, id) {
+function Player(name) {
   const randomAttack = (max, min) =>
     Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -8,7 +8,6 @@ function Player(name, id) {
     let attempt = true;
     while (attempt) {
       const attack = randomAttack(99, 0);
-      console.log(attack);
       if (!attackSended.includes(attack)) {
         attackSended.push(attack);
         attempt = false;
@@ -17,9 +16,7 @@ function Player(name, id) {
     }
   };
 
-  return { name, id, attackAI };
+  return { name, attackAI };
 }
-
-// module.exports = Player;
 
 export { Player };
