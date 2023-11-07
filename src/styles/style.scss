@@ -1,5 +1,6 @@
 $color-red: rgb(0, 255, 38);
-$ship: #6c6c6c;
+$ship: #333;
+$board: hsl(200, 100%, 50%);
 
 h1 {
   color: $color-red;
@@ -9,13 +10,16 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
+  gap: 50px;
 }
 
 .machineBoard,
 .humanBoard {
     display: grid;
-    grid-template-columns: repeat(10,35px);
+    grid-template-columns: repeat(10,40px);
+    background-color: $board;
+    border: 3px solid #fefefe;
+    box-shadow: 2px 2px 8px #333; 
 }
 
 .disabled{
@@ -23,8 +27,8 @@ h1 {
 }
 
 .grid {
-  height: 30px;
-  border: 1px solid gray;
+  height: 40px;
+  border: 1px solid rgb(227, 221, 221);
 }
 
 .ship{
@@ -36,7 +40,7 @@ h1 {
 }
 
 .fail {
-  background-color: #0093aa
+  background-color: transparent
 }
 
 .modal{
@@ -60,4 +64,69 @@ h1 {
 
 .is-close{
   display: none;
+}
+
+.ships {
+  display: flex;
+  border: 1px solid black;
+  padding: 15px;
+  height: auto;
+  margin: 40px;
+  
+  .carrier,
+  .battleship,
+  .destroyer,
+  .submarine,
+  .boat {
+    display: grid;
+    padding: 10px;
+  }
+  .carrier > div,
+  .battleship > div,
+  .destroyer > div,
+  .submarine > div,
+  .boat > div {
+    background-color: $ship;
+  }
+
+  .carrier.horizontal { 
+    grid-template-columns: repeat(5, 40px);
+  }
+  .battleship.horizontal {
+    grid-template-columns: repeat(4,40px);
+  }
+  .destroyer.horizontal{
+    grid-template-columns: repeat(3, 40px);
+  }
+  .submarine.horizontal{
+    grid-template-columns: repeat(3, 40px);
+  }
+  .boat.horizontal{
+    grid-template-columns: repeat(2, 40px);
+  }
+
+  .carrier.vertical { 
+    grid-template-rows: repeat(5, 40px);
+    width: 40px;
+  }
+  .battleship.vertical {
+    grid-template-rows: repeat(4, 40px);
+    width: 40px;
+  }
+  .destroyer.vertical{
+    grid-template-rows: repeat(3, 40px);
+    width: 40px;
+  }
+  .submarine.vertical{
+    grid-template-rows: repeat(3, 40px);
+    width: 40px;
+  }
+  .boat.vertical{
+    grid-template-rows: repeat(2, 40px);
+    width: 40px;
+  }
+}
+
+.hover { 
+  background-color: $ship;
 }
