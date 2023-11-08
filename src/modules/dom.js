@@ -39,12 +39,12 @@ function dom() {
     document.querySelector(".turn").textContent = `Turn of player: ${player}`;
   }
 
-  const renderBoard = () => {
+  const getCoordinates = (ship) => {
     const boardPlayer = document.querySelector(".humanBoard").childNodes;
     const nodeShips = Array.from(boardPlayer)
-      .filter((node) => node.classList.contains("boat"))
-      .map((el) => el.dataset.coordinate);
-    console.log(nodeShips);
+      .filter((node) => node.classList.contains(ship))
+      .map((el) => parseInt(el.dataset.coordinate));
+    return nodeShips;
   };
 
   document.getElementById("rotate").addEventListener("click", (e) => {
@@ -55,7 +55,7 @@ function dom() {
     });
   });
 
-  return {createBoard, drawShips, stateAttack, showTurn, renderBoard};
+  return {createBoard, drawShips, stateAttack, showTurn, getCoordinates};
 }
 
 export { dom };
