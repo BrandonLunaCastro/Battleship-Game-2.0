@@ -38,7 +38,24 @@ function dom() {
   function showTurn(player) {
     document.querySelector(".turn").textContent = `Turn of player: ${player}`;
   }
-  return {createBoard, drawShips, stateAttack, showTurn};
+
+  const renderBoard = () => {
+    const boardPlayer = document.querySelector(".humanBoard").childNodes;
+    const nodeShips = Array.from(boardPlayer)
+      .filter((node) => node.classList.contains("boat"))
+      .map((el) => el.dataset.coordinate);
+    console.log(nodeShips);
+  };
+
+  document.getElementById("rotate").addEventListener("click", (e) => {
+    const draggable = document.querySelectorAll(".draggable");
+    draggable.forEach((node) => {
+      node.classList.toggle("horizontal");
+      node.classList.toggle("vertical");
+    });
+  });
+
+  return {createBoard, drawShips, stateAttack, showTurn, renderBoard};
 }
 
 export { dom };
