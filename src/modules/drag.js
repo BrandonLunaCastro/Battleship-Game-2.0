@@ -43,13 +43,12 @@ function dragShips() {
         boardNodes.push(node);
         console.log(boardNodes);
         parseCoord += 10;
-      }
-      console.log(boardNodes);
+      } 
       Array.from(childNodes).map((node, i) => boardNodes[i].replaceWith(node));
     };
     
     const domMethods = dom();
-    domMethods.renderBoard();
+    console.log(domMethods.getCoordinates("carrier"));
   });
 }
 
