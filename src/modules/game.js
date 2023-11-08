@@ -39,6 +39,7 @@ export default function gameLoop() {
 
   dragShips();
 
+
   function playGame() {
     const attackAI = () => {
       const randomCoordinate = playerMachine.attackAI();
