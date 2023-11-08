@@ -22,11 +22,11 @@ function dragShips() {
     const ship = document.querySelector(`.${classShip.split(" ")[0]}`);
     const childNodes = ship.childNodes;
     const amountNodes = ship.childNodes.length;
-    let coordinate = parseInt(gridBoard.dataset.coordinate);
+    let coordinate = gridBoard.dataset.coordinate;
     e.target.classList.remove("hover");
 
-    console.log(horizontal(classShip, amountNodes, coordinate));
-    if (horizontal(classShip, amountNodes, coordinate)) {
+    if ( classShip.includes("horizontal") && position(amountNodes, coordinate, 1) && verifySpace(amountNodes, gridBoard, 1) ) {
+      console.log("entra aqui h");
       const arrNodes = [];
       for (let i = 0; i < amountNodes; i++) {
         childNodes[i].setAttribute("data-coordinate", coordinate);
@@ -37,7 +37,12 @@ function dragShips() {
       Array.from(childNodes).map((node, i) => arrNodes[i].replaceWith(node));
     }
 
-    if (vertical(classShip, amountNodes, coordinate)) {
+    console.log(classShip.includes("vertical"));
+    console.log(position(amountNodes, coordinate, 10));
+    console.log(verifySpace(amountNodes, gridBoard, 10));
+
+    if (classShip.includes("vertical") && position(amountNodes, coordinate, 10) && verifySpace(amountNodes, gridBoard, 10)) {
+      console.log("entra aqui v");
       const boardNodes = [];
       for(let i = 0; i < amountNodes; i++){
         childNodes[i].setAttribute("data-coordinate", coordinate);
@@ -53,19 +58,42 @@ function dragShips() {
   });
 }
 
-function horizontal(classShip, amountNodes, coordinate){
-  if (!classShip.includes("horizontal")) return false;
+// The factor depends is horizontal or vertical orientation  
+function verifySpace (childLength, gridBoard, factor) {
+  console.log(factor);
+  let initCoordinate = parseInt(gridBoard.dataset.coordinate);
+  const arrNodes = [];
+  const prevNode = document.querySelector(`.human[data-coordinate="${initCoordinate - factor}"]`);
+  arrNodes.push(prevNode);
+  for (let j = 0; j <= childLength; j++) { 
+    const node = document.querySelector(`.human[data-coordinate="${initCoordinate}"]`);
+    if(initCoordinate === 99) break;
+    if(!node)return false;
+    arrNodes.push(node);
+    initCoordinate += factor;
+  } 
+  console.log(arrNodes);
+  return arrNodes.every((node) => !node.className.includes("ship"));
+}
+
+function position( amountNodes, coordinate, factorSum){
+  const lastNumber = coordinate.slice(1);
+  coordinate = parseInt(coordinate);
   const arrCoords = [];
   for (let i = 0; i < amountNodes; i++){
-    if (coordinate <= 99) {
+    console.log(coordinate);
+    if (coordinate <= 99 && amountNodes <= (10 - lastNumber)) {
       arrCoords.push(coordinate);
-      coordinate++; 
+      coordinate += factorSum; 
+      console.log(arrCoords);
+    } else {
+      return false;
     }
   }
   return arrCoords.length === amountNodes;
 }
 
-function vertical(classShip, amountNodes, coordinate) {
+/* function vertical(classShip, amountNodes, coordinate) {
   const arrCoords = [];
   if (classShip.includes("vertical")) {
     for (let i = 0; i < amountNodes; i++) {
@@ -79,6 +107,6 @@ function vertical(classShip, amountNodes, coordinate) {
     return arrCoords.length === amountNodes;
   }
   return false;
-}
+} */
 
 export { dragShips };
