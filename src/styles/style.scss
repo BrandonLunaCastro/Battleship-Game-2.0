@@ -2,6 +2,14 @@ $color-red: rgb(0, 255, 38);
 $ship: #333;
 $board: hsl(200, 100%, 50%);
 
+*,
+::after,
+::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 h1 {
   color: $color-red;
 }
@@ -15,35 +23,34 @@ h1 {
 
 .machineBoard,
 .humanBoard {
-    display: grid;
-    grid-template-columns: repeat(10,40px);
-    background-color: $board;
-    border: 3px solid #fefefe;
-    box-shadow: 2px 2px 8px #333; 
+  display: grid;
+  grid-template-columns: repeat(10, 40px);
+  background-color: $board;
+  box-shadow: 1px 1px 4px #7e7e7e;
 }
 
-.disabled{
+.disabled {
   pointer-events: none;
 }
 
 .grid {
   height: 40px;
-  border: 1px solid rgb(227, 221, 221);
+  border: 1px solid hsla(0,0%,100%,.2);
 }
 
-.ship{
-    background-color: $ship;
+.ship {
+  background-color: $ship;
 }
 
 .hit {
-  background-color:  red;  
+  background-color: red;
 }
 
 .fail {
-  background-color: transparent
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal{
+.modal {
   display: flex;
   padding: 15px;
   position: absolute;
@@ -57,55 +64,54 @@ h1 {
   border: 1px solid black;
   top: 40%;
   box-shadow: 4px 4px 9px rgb(159, 159, 159);
-  button{
+  button {
     width: 100px;
   }
 }
 
-.is-close{
+.is-close {
   display: none;
+}
+
+.options {
+  border: 1px solid #333;
+  margin: 15px;
+  padding: 18px;
+  height: 265px;
+  width: 800px;
 }
 
 .ships {
   display: flex;
-  border: 1px solid black;
-  padding: 15px;
-  height: auto;
-  margin: 40px;
-  
+  gap: 15px;
+  width: auto;
+  margin: 15px 0;
+
   .carrier,
   .battleship,
   .destroyer,
   .submarine,
   .boat {
     display: grid;
-    padding: 10px;
-  }
-  .carrier > div,
-  .battleship > div,
-  .destroyer > div,
-  .submarine > div,
-  .boat > div {
-    background-color: $ship;
-  }
+  } 
 
-  .carrier.horizontal { 
+  .carrier.horizontal {
     grid-template-columns: repeat(5, 40px);
   }
   .battleship.horizontal {
-    grid-template-columns: repeat(4,40px);
+    grid-template-columns: repeat(4, 40px);
   }
-  .destroyer.horizontal{
+  .destroyer.horizontal {
     grid-template-columns: repeat(3, 40px);
   }
-  .submarine.horizontal{
+  .submarine.horizontal {
     grid-template-columns: repeat(3, 40px);
   }
-  .boat.horizontal{
+  .boat.horizontal {
     grid-template-columns: repeat(2, 40px);
   }
 
-  .carrier.vertical { 
+  .carrier.vertical {
     grid-template-rows: repeat(5, 40px);
     width: 40px;
   }
@@ -113,20 +119,20 @@ h1 {
     grid-template-rows: repeat(4, 40px);
     width: 40px;
   }
-  .destroyer.vertical{
+  .destroyer.vertical {
     grid-template-rows: repeat(3, 40px);
     width: 40px;
   }
-  .submarine.vertical{
+  .submarine.vertical {
     grid-template-rows: repeat(3, 40px);
     width: 40px;
   }
-  .boat.vertical{
+  .boat.vertical {
     grid-template-rows: repeat(2, 40px);
     width: 40px;
   }
 }
 
-.hover { 
+.hover {
   background-color: $ship;
 }
