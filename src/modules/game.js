@@ -12,12 +12,6 @@ export default function gameLoop() {
 
   const domMethods = dom();
 
-/*   humanBoard.placeShip([20, 21, 22, 23, 24], "carrier");
-  humanBoard.placeShip([40, 50, 60, 70], "battleship");
-  humanBoard.placeShip([65, 66, 67], "destroyer");
-  humanBoard.placeShip([4, 5, 6], "submarine");
-  humanBoard.placeShip([85, 95], "boat"); */
-
   machineBoard.placeShip([20, 21, 22, 23, 24], "carrier");
   machineBoard.placeShip([40, 50, 60, 70], "battleship");
   machineBoard.placeShip([65, 66, 67], "destroyer");
@@ -36,8 +30,6 @@ export default function gameLoop() {
   domMethods.drawShips(coordinateShipsHuman, playerOne);
   domMethods.drawShips(coordinateShipsMachine, playerMachine);
   domMethods.showTurn(playerOne.name);
-
-  dragShips();
 
   function playGame() {
     const attackAI = () => {
@@ -66,4 +58,31 @@ export default function gameLoop() {
       }, 1000);
     });
   }
+
+  dragShips();
+  domMethods.rotateDirection();
+  
+  (() => {
+    document.getElementById("start__game").addEventListener("click", (e) => { 
+
+      const carrier = domMethods.getCoordinates("carrier");
+      const battlefield = domMethods.getCoordinates("battleship");
+      const destroyer = domMethods.getCoordinates("destroyer");
+      const submarine = domMethods.getCoordinates("submarine");
+      const boat = domMethods.getCoordinates("boat");
+      
+      humanBoard.placeShip(carrier, "carrier");
+      humanBoard.placeShip(battlefield, "battleship");
+      humanBoard.placeShip(destroyer, "destroyer");
+      humanBoard.placeShip(submarine, "submarine");
+      humanBoard.placeShip(boat, "boat");
+
+      if (domMethods.enableStartBtn() === true) {
+        playGame();
+      }
+
+    });
+  })();
+
+
 }
