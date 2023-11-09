@@ -42,7 +42,6 @@ function dragShips() {
         const node = document.querySelector(`.grid.human[data-coordinate="${parseCoord}"]`);
         childNodes[i].setAttribute("data-coordinate", parseCoord);
         boardNodes.push(node);
-        console.log(boardNodes);
         parseCoord += 10;
       } 
       Array.from(childNodes).map((node, i) => boardNodes[i].replaceWith(node));
