@@ -12,12 +12,6 @@ export default function gameLoop() {
 
   const domMethods = dom();
 
-  machineBoard.placeShip([20, 21, 22, 23, 24], "carrier");
-  machineBoard.placeShip([40, 50, 60, 70], "battleship");
-  machineBoard.placeShip([65, 66, 67], "destroyer");
-  machineBoard.placeShip([4, 5, 6], "submarine");
-  machineBoard.placeShip([80, 90], "boat");
-
   const boardOne = document.querySelector(".humanBoard");
   const boardTwo = document.querySelector(".machineBoard");
   // create both boards
@@ -71,6 +65,20 @@ export default function gameLoop() {
       const submarine = domMethods.getCoordinates("submarine");
       const boat = domMethods.getCoordinates("boat");
       
+      /*   machineBoard.placeShip([20, 21, 22, 23, 24], "carrier");
+  machineBoard.placeShip([40, 50, 60, 70], "battleship");
+  machineBoard.placeShip([65, 66, 67], "destroyer");
+  machineBoard.placeShip([4, 5, 6], "submarine");
+  machineBoard.placeShip([80, 90], "boat"); */      
+      // console.log(playerMachine.randomCoordinates(3));
+/*    const machineCarrier = playerMachine.randomCoordinates(5);
+      const machineBattleship = ;
+      const machineDestroyer = ;
+      const machineBoat = ; */
+      const machineSubmarine = playerMachine.verifyCoordinate(machineBoard, 3, "submarine");
+      console.log(machineSubmarine);
+      console.log(machineBoard.board);
+
       humanBoard.placeShip(carrier, "carrier");
       humanBoard.placeShip(battlefield, "battleship");
       humanBoard.placeShip(destroyer, "destroyer");
