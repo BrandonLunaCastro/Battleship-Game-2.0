@@ -31,7 +31,6 @@ function dragShips() {
         arrNodes.push(node);
         coordinate++;
       }
-      
       Array.from(childNodes).map((node, i) => arrNodes[i].replaceWith(node));
       ship.remove();
     } 
@@ -47,9 +46,6 @@ function dragShips() {
       Array.from(childNodes).map((node, i) => boardNodes[i].replaceWith(node));
       ship.remove();
     };
-
-   
-  
   });
 }
 
