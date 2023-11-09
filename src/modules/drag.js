@@ -1,5 +1,3 @@
-import { dom } from "./dom.js";
-
 function dragShips() {
   const board = document.querySelector(".humanBoard");
   
@@ -24,6 +22,7 @@ function dragShips() {
     const amountNodes = ship.childNodes.length;
     let coordinate = gridBoard.dataset.coordinate;
     e.target.classList.remove("hover");
+    
     if ( classShip.includes("horizontal") && position(classShip, amountNodes, coordinate) && verifySpace(amountNodes, gridBoard, 1) ) {
       const arrNodes = [];
       for (let i = 0; i < amountNodes; i++) {
@@ -32,7 +31,9 @@ function dragShips() {
         arrNodes.push(node);
         coordinate++;
       }
+      
       Array.from(childNodes).map((node, i) => arrNodes[i].replaceWith(node));
+      ship.remove();
     } 
     if (classShip.includes("vertical") && position( classShip, amountNodes, coordinate) && verifySpace(amountNodes, gridBoard, 10)) {
       const boardNodes = [];
@@ -45,10 +46,11 @@ function dragShips() {
         parseCoord += 10;
       } 
       Array.from(childNodes).map((node, i) => boardNodes[i].replaceWith(node));
+      ship.remove();
     };
-    
-    const domMethods = dom();
-    console.log(domMethods.getCoordinates("carrier"));
+
+   
+  
   });
 }
 
