@@ -47,15 +47,30 @@ function dom() {
     return nodeShips;
   };
 
-  document.getElementById("rotate").addEventListener("click", (e) => {
-    const draggable = document.querySelectorAll(".draggable");
-    draggable.forEach((node) => {
-      node.classList.toggle("horizontal");
-      node.classList.toggle("vertical");
-    });
-  });
 
-  return {createBoard, drawShips, stateAttack, showTurn, getCoordinates};
+  function rotateDirection(){
+    const shipsSection = document.querySelector(".ships");
+    const btnRotate = document.getElementById("rotate");
+    
+    const rotate = (e) => {
+      const arrShips = Array.from(shipsSection.children);  
+      arrShips.forEach((node) => {
+        node.classList.toggle("horizontal");
+        node.classList.toggle("vertical");
+      });
+    };
+  
+    btnRotate.addEventListener(("click"), rotate);
+  }
+
+  const enableStartBtn = () => { 
+    const shipsSection = document.querySelector(".ships");
+    return shipsSection.children.length === 0;
+    
+  };
+
+
+  return {createBoard, drawShips, stateAttack, showTurn, getCoordinates, rotateDirection, enableStartBtn};
 }
 
 export { dom };
