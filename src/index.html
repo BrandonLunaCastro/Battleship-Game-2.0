@@ -8,19 +8,20 @@
 <body>
     <h1>Battleship</h1>
     <p class="turn"></p>
+    <p class="state__attack"></p>
     <article class="modal is-close">
         <h2 class="winner">winner</h2>
-        <button type="button">Restart Game</button>
+        <button type="button" id="restart">Restart Game</button>
     </article>
     <article class="boards">
         <section class="humanBoard "></section>
         <section class="machineBoard "></section>
     </article>
-    <div>
-        <button type="button" id="start__game">Start Game</button>
-        <button type="button" id="rotate">Rotate</button>
-    </div>
     <article class="options">
+        <div>
+            <button type="button" id="start__game">Start Game</button>
+            <button type="button" id="rotate">Rotate</button>
+        </div>
         <section class="ships">
             <div class="carrier vertical draggable" draggable="true">
                 <div class="grid human ship carrier"></div>
