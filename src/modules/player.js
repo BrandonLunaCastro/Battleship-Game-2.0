@@ -19,18 +19,18 @@ function Player(name) {
   const randomCoordinates = (shipLength) => {
     const axis = randomNumber(1, 0) === 1 ? "x" : "y";
     const arrCords = [];
-    
-    let initialCoord =  randomNumber(99, 0);
+
+    let initialCoord = randomNumber(99, 0);
     let factor;
 
     if (axis === "x") {
-      console.log("entra al axis x");
       factor = 1;
       for (let i = 0; i < shipLength; i++) {
-        const lastNumber = initialCoord >= 10
-          ? initialCoord.toString().slice(1)
-          : initialCoord.toString().slice(0, 1);
-        
+        const lastNumber =
+          initialCoord >= 10
+            ? initialCoord.toString().slice(1)
+            : initialCoord.toString().slice(0, 1);
+
         if (lastNumber === "0" && i === 0) {
           arrCords.push(initialCoord);
           initialCoord += factor;
@@ -47,11 +47,10 @@ function Player(name) {
           return false;
         }
       }
-    } 
-    if ( axis === "y") { 
-      console.log("entra al axis y");
-      factor = 10; 
-      for( let j = 0; j < shipLength; j++) {
+    }
+    if (axis === "y") {
+      factor = 10;
+      for (let j = 0; j < shipLength; j++) {
         if (initialCoord <= 99) {
           arrCords.push(initialCoord);
           initialCoord += factor;
@@ -65,9 +64,14 @@ function Player(name) {
   };
 
   const verifyCoordinate = (board, length, name) => {
-    const randomArray = randomCoordinates(length);
-    console.log(board.placeShip(randomArray, name));
-    
+    while (true) {
+      const randomArray = randomCoordinates(length);
+      console.log(randomArray);
+      if (randomArray === false) continue;
+      if (board.placeShip(randomArray, name) !== "already place here") {
+        break;
+      }
+    }
   };
 
   return { name, attackAI, verifyCoordinate };
