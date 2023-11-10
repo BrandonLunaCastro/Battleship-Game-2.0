@@ -14,16 +14,20 @@ export default function gameLoop() {
 
   const boardOne = document.querySelector(".humanBoard");
   const boardTwo = document.querySelector(".machineBoard");
+
   // create both boards
   domMethods.createBoard(boardOne, playerOne.name);
   domMethods.createBoard(boardTwo, playerMachine.name);
 
-  const coordinateShipsHuman = humanBoard.coordinateShips;
   const coordinateShipsMachine = machineBoard.coordinateShips;
-  // draw correctly ships on the game board
-  domMethods.drawShips(coordinateShipsHuman, playerOne);
+
+  // draw and place correctly ships on the game board machine
+  playerMachine.verifyCoordinate(machineBoard, 5, "carrier");
+  playerMachine.verifyCoordinate(machineBoard, 4, "battleship");
+  playerMachine.verifyCoordinate(machineBoard, 3, "destroyer");
+  playerMachine.verifyCoordinate(machineBoard, 3, "submarine");
+  playerMachine.verifyCoordinate(machineBoard, 2, "boat");
   domMethods.drawShips(coordinateShipsMachine, playerMachine);
-  domMethods.showTurn(playerOne.name);
 
   function playGame() {
     const attackAI = () => {
@@ -40,44 +44,32 @@ export default function gameLoop() {
       if (!e.target.matches(".grid")) return false;
       const coordinate = parseInt(e.target.dataset.coordinate);
       const attack = machineBoard.receiveAttack(coordinate);
-
-      domMethods.stateAttack(e.target, attack, machineBoard, playerOne);
+      
+      const state = domMethods.stateAttack(e.target, attack, machineBoard, playerOne);
       domMethods.showTurn(playerMachine.name);
-
+    
       const currentTarget = e.currentTarget;
-      currentTarget.classList.add("disabled");
-      setTimeout(() => {
-        attackAI();
-        currentTarget.classList.remove("disabled");
-      }, 1000);
+      
+      if (state !== false){
+        currentTarget.classList.add("disabled");
+        setTimeout(() => {
+          attackAI();
+          currentTarget.classList.remove("disabled");
+        }, 2000);
+      }
     });
   }
 
   dragShips();
   domMethods.rotateDirection();
-  
-  (() => {
-    document.getElementById("start__game").addEventListener("click", (e) => { 
 
+  (() => {
+    document.getElementById("start__game").addEventListener("click", (e) => {
       const carrier = domMethods.getCoordinates("carrier");
       const battlefield = domMethods.getCoordinates("battleship");
       const destroyer = domMethods.getCoordinates("destroyer");
       const submarine = domMethods.getCoordinates("submarine");
       const boat = domMethods.getCoordinates("boat");
-      
-      /*   machineBoard.placeShip([20, 21, 22, 23, 24], "carrier");
-  machineBoard.placeShip([40, 50, 60, 70], "battleship");
-  machineBoard.placeShip([65, 66, 67], "destroyer");
-  machineBoard.placeShip([4, 5, 6], "submarine");
-  machineBoard.placeShip([80, 90], "boat"); */      
-      // console.log(playerMachine.randomCoordinates(3));
-/*    const machineCarrier = playerMachine.randomCoordinates(5);
-      const machineBattleship = ;
-      const machineDestroyer = ;
-      const machineBoat = ; */
-      const machineSubmarine = playerMachine.verifyCoordinate(machineBoard, 3, "submarine");
-      console.log(machineSubmarine);
-      console.log(machineBoard.board);
 
       humanBoard.placeShip(carrier, "carrier");
       humanBoard.placeShip(battlefield, "battleship");
@@ -86,11 +78,9 @@ export default function gameLoop() {
       humanBoard.placeShip(boat, "boat");
 
       if (domMethods.enableStartBtn() === true) {
+        domMethods.showTurn(playerOne.name);
         playGame();
       }
-
     });
   })();
-
-
 }
