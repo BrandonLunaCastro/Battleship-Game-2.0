@@ -10,7 +10,18 @@ function gameBoard() {
     board.push(null);
   }
 
-  const verifySpace = (coords) => coords.every((c) => board[c] === null);
+  const verifySpace = (coords) =>
+    coords.every((c) => {
+      const width =
+        typeof board[c - 1] !== "string" &&
+        typeof board[c] !== "string" &&
+        typeof board[c + 1] !== "string";
+      const height =
+        typeof board[c - 10] !== "string" &&
+        typeof board[c] !== "string" &&
+        typeof board[c + 10] !== "string";
+      return width && height;
+    });
 
   const placeShip = (coordinates, name) => {
     const newShip = Ship(coordinates.length, name);
@@ -29,7 +40,7 @@ function gameBoard() {
   const verifyShip = (name) => allShips.filter((ship) => ship.name === name);
 
   const verifyAttack = (coord) => attackSended.includes(parseInt(coord));
-  
+
   const receiveAttack = (attackCoordinates) => {
     if (board[attackCoordinates] !== null && !verifyAttack(attackCoordinates)) {
       const nameShip = board[attackCoordinates];
@@ -45,7 +56,6 @@ function gameBoard() {
       attackSended.push(attackCoordinates);
       return false;
     }
-
     return "already attacked";
   };
 
