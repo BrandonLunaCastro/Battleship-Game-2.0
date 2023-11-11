@@ -1,4 +1,4 @@
-function dragShips(playerOne) {
+function dragShips() {
   const board = document.querySelector(".humanBoard");
   document.querySelector(".ships").addEventListener("dragstart", (e) => {
     e.dataTransfer.setData("class", e.target.className);
