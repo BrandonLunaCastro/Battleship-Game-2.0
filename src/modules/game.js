@@ -3,15 +3,15 @@ import { gameBoard } from "./gameBoard.js";
 import { dom } from "./dom.js";
 import { dragShips } from "./drag.js";
 
-export default function gameLoop() {
-  const playerOne = Player("human", 0);
+export default function gameLoop(name) {
+  const playerOne = Player(name, 0);
   const playerMachine = Player("machine", 1);
-
+  
+  const domMethods = dom();
+  
   const humanBoard = gameBoard();
   const machineBoard = gameBoard();
-
-  const domMethods = dom();
-
+  
   const boardOne = document.querySelector(".humanBoard");
   const boardTwo = document.querySelector(".machineBoard");
 
@@ -60,7 +60,7 @@ export default function gameLoop() {
     });
   }
 
-  dragShips();
+  dragShips(playerOne.name);
   domMethods.rotateDirection();
 
   (() => {
@@ -70,23 +70,18 @@ export default function gameLoop() {
       const destroyer = domMethods.getCoordinates("destroyer");
       const submarine = domMethods.getCoordinates("submarine");
       const boat = domMethods.getCoordinates("boat");
-
-      
-      const cinco = humanBoard.placeShip(carrier, "carrier");
-      const cuatro = humanBoard.placeShip(battlefield, "battleship");
-      const tres = humanBoard.placeShip(destroyer, "destroyer");
-      const tresDos =humanBoard.placeShip(submarine, "submarine");
-      const dos = humanBoard.placeShip(boat, "boat");
-
-      console.log(cinco);
-      console.log(cuatro);
-      console.log(tres);
-      console.log(tresDos);
-      console.log(dos);
+    
+      humanBoard.placeShip(carrier, "carrier");
+      humanBoard.placeShip(battlefield, "battleship");
+      humanBoard.placeShip(destroyer, "destroyer");
+      humanBoard.placeShip(submarine, "submarine");
+      humanBoard.placeShip(boat, "boat");
 
       if (domMethods.enableStartBtn() === true) {
-        domMethods.showTurn(playerOne.name);
         playGame();
+        domMethods.showTurn(playerOne.name);
+        boardTwo.classList.add("cursor-attack");
+        domMethods.showBoard(boardTwo);
       }
     });
   })();
