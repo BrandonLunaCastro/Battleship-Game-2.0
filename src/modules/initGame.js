@@ -8,9 +8,9 @@ const initGame = () => {
       setTimeout(() => span.classList.remove("empty__name"), 1000);
     } else {
       document.querySelector(".start__window").classList.add("is-close");
-      gameLoop(inputName.value);
+      sessionStorage.setItem("name", inputName.value);
+      gameLoop();
     };
-    
   });
 };
 
