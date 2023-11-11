@@ -1,8 +1,9 @@
-import gameLoop from "./modules/game.js";
+
+import { initGame } from "./modules/initGame.js";
 import "./styles/style.scss";
 
 const initApp = () => {
-  gameLoop();
+  initGame();
 };
 
 
