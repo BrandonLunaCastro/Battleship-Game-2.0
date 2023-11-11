@@ -3,10 +3,10 @@ import { gameBoard } from "./gameBoard.js";
 import { dom } from "./dom.js";
 import { dragShips } from "./drag.js";
 
-export default function gameLoop(name) {
-  const playerOne = Player(name, 0);
+export default function gameLoop() {
+  const playerOne = Player("human", 0);
   const playerMachine = Player("machine", 1);
-  
+  const name = sessionStorage.getItem("name");
   const domMethods = dom();
   
   const humanBoard = gameBoard();
@@ -37,7 +37,7 @@ export default function gameLoop(name) {
       );
       const attackHuman = humanBoard.receiveAttack(randomCoordinate);
       domMethods.stateAttack(grid, attackHuman, humanBoard, playerMachine);
-      domMethods.showTurn(playerOne.name);
+      domMethods.showTurn(name);
     };
 
     boardTwo.addEventListener("click", (e) => {
@@ -55,12 +55,12 @@ export default function gameLoop(name) {
         setTimeout(() => {
           attackAI();
           currentTarget.classList.remove("disabled");
-        }, 0);
+        }, 1200);
       }
     });
   }
 
-  dragShips(playerOne.name);
+  dragShips();
   domMethods.rotateDirection();
 
   (() => {
@@ -79,7 +79,7 @@ export default function gameLoop(name) {
 
       if (domMethods.enableStartBtn() === true) {
         playGame();
-        domMethods.showTurn(playerOne.name);
+        domMethods.showTurn(name);
         boardTwo.classList.add("cursor-attack");
         domMethods.showBoard(boardTwo);
       }
