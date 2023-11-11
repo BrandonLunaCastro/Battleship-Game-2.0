@@ -1,11 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap");
+
 $color-red: rgb(172, 11, 11);
 $military-green: #006400;
 $slate: #020617;
+$background: #0c192c;
 $ship: #9098a9;
 $board: #2491ec;
 $fail: #f4f8ff;
-$options: #172554;
+$night-sky: #07396b;
 
 *,
 ::after,
@@ -16,12 +18,102 @@ $options: #172554;
   font-family: "Saira Stencil One", sans-serif;
 }
 
+html,
+body {
+  background: $background;
+  height: 100%;
+}
+
+button {
+  outline: none;
+}
+
+.start__window {
+  background-color: $background;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+
+  .enter__player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+
+    .welcome {
+      display: block;
+      margin: 0 auto;
+      font-weight: 500;
+      white-space: nowrap;
+      border-right: 4px solid;
+      width: 34ch;
+      font-size: 3rem;
+      color: white;
+      animation:
+        typing 4s steps(34),
+        blink 0.5s infinite;
+      overflow: hidden;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    .user {
+      display: inherit;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+
+      &__name {
+        width: 40vmin;
+        height: 4vmin;
+        outline: none;
+        font-size: 1.2rem;
+        border: none;
+        box-shadow: 1px 1px 14px $fail;
+      }
+
+      #enter__game {
+        width: 18vmin;
+        height: 5vmin;
+        font-size: 2vmin;
+        border-radius: 4px;
+        background-color: $board;
+        color: $fail;
+        box-shadow: 1px 1px 18px $board;
+        border: none;
+        outline: none;
+        &:hover {
+          cursor: pointer;
+          animation: change 0.9s infinite alternate-reverse ease-in-out;
+        }
+      }
+    }
+  }
+}
+
 h1 {
   text-align: center;
   margin: 15px;
   font-size: 5rem;
   font-weight: 500;
-  color: $slate;
+  color: $fail;
 }
 
 .boards {
@@ -81,7 +173,6 @@ h1 {
   @include sternHorizontal();
 }
 
-
 .hit,
 .fail {
   display: flex;
@@ -116,33 +207,44 @@ h1 {
   border-color: white;
 }
 
-@keyframes pulse {
-  0% {
-    opacity: 1;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(4);
-  }
-}
-
 .modal {
-  display: flex;
-  padding: 15px;
   position: absolute;
+  top: 0;
+  background: rgba(0, 0, 0, 0.5);
   width: 100%;
-  right: 0;
-  left: 0;
-  background-color: rgb(240, 248, 255);
-  flex-direction: column;
+  height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
-  top: 40%;
-  box-shadow: 4px 4px 9px rgb(159, 159, 159);
-  button {
-    width: 100px;
+  z-index: 99;
+
+  &__content {
+    display: inherit;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 15px;
+    font-size: 2rem;
+    width: 80%;
+    height: 25vmin;
+    background-color: #f0f9ff;
+    border-radius: 5px;
+    color: $night-sky;
+
+    button {
+      height: 50px;
+      width: 150px;
+      font-size: 1.2rem;
+      background-color: $military-green;
+      box-shadow: 1px 1px 18px $military-green;
+      border: none;
+      border-radius: 5px;
+      transition: all 0.3s ease-out;
+      &:hover {
+        cursor: pointer;
+        animation: change 0.8s infinite alternate ease-in-out;
+      }
+    }
   }
 }
 
@@ -156,15 +258,27 @@ h1 {
   padding: 18px;
   height: fit-content;
   width: 800px;
-  background-color: $options;
-  
+  background-color: $night-sky;
 
-  &__buttons{
+  &__buttons {
     display: flex;
     justify-content: center;
     gap: 16px;
-  }
+    margin-bottom: 20px;
 
+    #start__game {
+      &:hover {
+        cursor: pointer;
+        animation: jumping 0.4s infinite alternate-reverse ease-in-out;
+      }
+    }
+    #rotate {
+      &:hover {
+        cursor: pointer;
+        animation: jumping 0.4s infinite 0.1s alternate-reverse ease-in-out;
+      }
+    }
+  }
 }
 
 #start__game,
@@ -174,7 +288,7 @@ h1 {
   background-color: $military-green;
   color: $slate;
   font-size: 1.2rem;
-  border: none ;
+  border: none;
   border-radius: 4px;
 }
 
@@ -236,4 +350,37 @@ h1 {
 
 .hover {
   background-color: $ship;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+
+@keyframes jumping {
+  0% {
+    transform: translateY(-8px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes change {
+  0% {
+    background-color: $military-green;
+    box-shadow: 1px 1px 18px $military-green;
+  }
+
+  100% {
+    background-color: $board;
+    color: $fail;
+    box-shadow: 1px 1px 18px $board;
+  }
 }
