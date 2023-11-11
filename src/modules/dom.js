@@ -22,7 +22,7 @@ function dom() {
   const verifyIsSunk = (board, player) => {
     if (board.allSunk()) {
       document.querySelector(".modal").classList.remove("is-close");
-      document.querySelector(".winner").textContent = `the winner is ${player}`;
+      document.querySelector(".winner").textContent = `The winner is player ${player}`;
       document
         .getElementById("restart")
         .addEventListener("click", (event) => location.reload());
