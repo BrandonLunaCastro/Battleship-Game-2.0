@@ -1,4 +1,5 @@
 function dom() {
+
   const createBoard = (reference, player) => {
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < 100; i++) {
@@ -17,6 +18,12 @@ function dom() {
       );
       referenceDom.classList.add("ship");
     }
+  };
+
+  const showBoard = (board) => {
+    const options = document.querySelector(".options");
+    options.classList.add("is-close");
+    board.classList.remove("is-close");
   };
 
   const verifyIsSunk = (board, player) => {
@@ -89,6 +96,7 @@ function dom() {
     getCoordinates,
     rotateDirection,
     enableStartBtn,
+    showBoard
   };
 }
 
