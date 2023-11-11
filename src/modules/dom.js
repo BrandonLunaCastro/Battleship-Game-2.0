@@ -30,25 +30,16 @@ function dom() {
   };
 
   const stateAttack = (target, attack, board, player) => {
-    const counter = document.querySelector(".state__attack");
-    const playerAttacked = player.name === "machine" ? "human" : "machine";
-
     if (attack === "already attacked") {
-      counter.textContent = "try again, this coordinate already been attacked";  
       return false;
     }
     if (attack) {
       target.classList.add("hit");
-      counter.textContent = `${player.name} hit on the ${playerAttacked} ship`;
       verifyIsSunk(board, player.name);
     } else {
       target.classList.add("fail");
-      counter.textContent = "fail on this board coordinate";
       verifyIsSunk(board, player.name);
     }
-    setTimeout(() => {
-      counter.textContent = "";
-    }, 900); 
   };
 
   function showTurn(player) {
