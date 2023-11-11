@@ -11,17 +11,12 @@ function gameBoard() {
   }
 
   const verifySpace = (coords) =>
-    coords.every((c) => {
-      const width =
+    coords.every(
+      (c) =>
         typeof board[c - 1] !== "string" &&
         typeof board[c] !== "string" &&
-        typeof board[c + 1] !== "string";
-      const height =
-        typeof board[c - 10] !== "string" &&
-        typeof board[c] !== "string" &&
-        typeof board[c + 10] !== "string";
-      return width && height;
-    });
+        typeof board[c + 1] !== "string"
+    );
 
   const placeShip = (coordinates, name) => {
     const newShip = Ship(coordinates.length, name);
