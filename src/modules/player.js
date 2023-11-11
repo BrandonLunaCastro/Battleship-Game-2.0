@@ -1,7 +1,7 @@
 function Player(name) {
   const randomNumber = (max, min) =>
     Math.floor(Math.random() * (max - min + 1) + min);
-
+  
   const attackSended = [];
 
   const attackAI = () => {
@@ -66,7 +66,6 @@ function Player(name) {
   const verifyCoordinate = (board, length, name) => {
     while (true) {
       const randomArray = randomCoordinates(length);
-      console.log(randomArray);
       if (randomArray === false) continue;
       if (board.placeShip(randomArray, name) !== "already place here") {
         break;
