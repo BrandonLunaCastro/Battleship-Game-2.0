@@ -46,9 +46,9 @@ function dom() {
       counter.textContent = "fail on this board coordinate";
       verifyIsSunk(board, player.name);
     }
-   /*  setTimeout(() => {
+    setTimeout(() => {
       counter.textContent = "";
-    }, 900); */
+    }, 900); 
   };
 
   function showTurn(player) {
