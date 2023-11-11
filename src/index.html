@@ -7,10 +7,21 @@
 </head>
 <body>
     <h1>Battleship</h1>
+    <article class="start__window ">
+        <div class="enter__player">
+            <h2 class="welcome">Let's play battleship please enter your name! :)</h2>
+            <div class="user">
+                <input type="text" name="user__name" id="user__name" class="user__name" required>
+                <button type="button" id="enter__game" >Enter Game</button>
+            </div>
+        </div>
+    </article>
     <p class="turn"></p>
     <article class="modal is-close">
-        <h2 class="winner">winner</h2>
-        <button type="button" id="restart">Restart Game</button>
+        <div class="modal__content ">
+            <h2 class="winner">The winner is </h2>
+            <button type="button" id="restart">Restart Game</button>
+        </div>
     </article>
     <article class="boards">
         <section class="humanBoard "></section>
