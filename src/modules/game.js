@@ -49,13 +49,13 @@ export default function gameLoop() {
       domMethods.showTurn(playerMachine.name);
     
       const currentTarget = e.currentTarget;
-      
+      console.log(humanBoard.board);
       if (state !== false){
         currentTarget.classList.add("disabled");
         setTimeout(() => {
           attackAI();
           currentTarget.classList.remove("disabled");
-        }, 2000);
+        }, 0);
       }
     });
   }
@@ -71,11 +71,18 @@ export default function gameLoop() {
       const submarine = domMethods.getCoordinates("submarine");
       const boat = domMethods.getCoordinates("boat");
 
-      humanBoard.placeShip(carrier, "carrier");
-      humanBoard.placeShip(battlefield, "battleship");
-      humanBoard.placeShip(destroyer, "destroyer");
-      humanBoard.placeShip(submarine, "submarine");
-      humanBoard.placeShip(boat, "boat");
+      
+      const cinco = humanBoard.placeShip(carrier, "carrier");
+      const cuatro = humanBoard.placeShip(battlefield, "battleship");
+      const tres = humanBoard.placeShip(destroyer, "destroyer");
+      const tresDos =humanBoard.placeShip(submarine, "submarine");
+      const dos = humanBoard.placeShip(boat, "boat");
+
+      console.log(cinco);
+      console.log(cuatro);
+      console.log(tres);
+      console.log(tresDos);
+      console.log(dos);
 
       if (domMethods.enableStartBtn() === true) {
         domMethods.showTurn(playerOne.name);
