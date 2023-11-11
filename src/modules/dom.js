@@ -46,9 +46,9 @@ function dom() {
       counter.textContent = "fail on this board coordinate";
       verifyIsSunk(board, player.name);
     }
-    setTimeout(() => {
+   /*  setTimeout(() => {
       counter.textContent = "";
-    }, 900);
+    }, 900); */
   };
 
   function showTurn(player) {
@@ -70,8 +70,15 @@ function dom() {
     const rotate = (e) => {
       const arrShips = Array.from(shipsSection.children);
       arrShips.forEach((node) => {
+        const nodeLength = node.children.length;
         node.classList.toggle("horizontal");
         node.classList.toggle("vertical");
+
+        node.children[0].classList.toggle("bow__vertical");
+        node.children[nodeLength-1].classList.toggle("stern__vertical");
+
+        node.children[0].classList.toggle("bow__horizontal");
+        node.children[nodeLength-1].classList.toggle("stern__horizontal");
       });
     };
 
