@@ -21,11 +21,15 @@ $night-sky: #07396b;
 html,
 body {
   background: $background;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-button {
-  outline: none;
+.turn {
+  display: block;
+  text-align: center;
+  font-size: 1.4rem;
+  color: $fail;
 }
 
 .start__window {
@@ -52,11 +56,11 @@ button {
       font-weight: 500;
       white-space: nowrap;
       border-right: 4px solid;
-      width: 34ch;
+      width: 29ch;
       font-size: 3rem;
       color: white;
       animation:
-        typing 4s steps(34),
+        typing 4s steps(29),
         blink 0.5s infinite;
       overflow: hidden;
     }
@@ -79,6 +83,7 @@ button {
       justify-content: center;
       align-items: center;
       gap: 25px;
+      position: relative;
 
       &__name {
         width: 40vmin;
@@ -86,7 +91,7 @@ button {
         outline: none;
         font-size: 1.2rem;
         border: none;
-        box-shadow: 1px 1px 14px $fail;
+        box-shadow: 0px 0px 8px $fail;
       }
 
       #enter__game {
@@ -108,12 +113,31 @@ button {
   }
 }
 
+.empty__name::after{
+  content: "Please enter a valid name";
+  position: absolute;
+  background-color: red;
+  top: 30px;
+  left: 40%;
+  color: white;
+  padding: 0 10px;
+}
+
 h1 {
   text-align: center;
   margin: 15px;
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 500;
   color: $fail;
+}
+
+.main__window{
+  margin: 0 15px;
+  padding: 10px;
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
 }
 
 .boards {
@@ -128,6 +152,10 @@ h1 {
   display: grid;
   grid-template-columns: repeat(10, 40px);
   background-color: $board;
+}
+
+.cursor-attack {
+  cursor: crosshair;
 }
 
 .disabled {
@@ -210,13 +238,16 @@ h1 {
 .modal {
   position: absolute;
   top: 0;
-  background: rgba(0, 0, 0, 0.5);
-  width: 100%;
+  right: 0;
+  left: 0;
+  bottom: 0;
   height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 99;
+  z-index: 999;
 
   &__content {
     display: inherit;
@@ -253,12 +284,13 @@ h1 {
 }
 
 .options {
-  border: 1px solid #fff;
+  border: 1px dashed #fff;
   margin: 15px auto;
   padding: 18px;
   height: fit-content;
   width: 800px;
   background-color: $night-sky;
+  transition: all .2s ease-in;
 
   &__buttons {
     display: flex;
@@ -295,6 +327,7 @@ h1 {
 .ships {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   padding: 20px;
   gap: 15px;
   width: auto;
@@ -309,6 +342,7 @@ h1 {
 
   @mixin gridColumns($num, $width) {
     grid-template-columns: repeat($num, $width);
+    width: fit-content;
   }
   .carrier.horizontal {
     @include gridColumns(5, 40px);
@@ -329,6 +363,7 @@ h1 {
   @mixin gridRows($num, $width) {
     grid-template-rows: repeat($num, $width);
     width: $width;
+    height: fit-content;
   }
 
   .carrier.vertical {
