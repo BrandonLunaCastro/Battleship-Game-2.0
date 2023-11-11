@@ -1,19 +1,15 @@
 function dragShips() {
   const board = document.querySelector(".humanBoard");
-
   document.querySelector(".ships").addEventListener("dragstart", (e) => {
     e.dataTransfer.setData("class", e.target.className);
   });
-
   board.addEventListener("dragover", (e) => {
     e.preventDefault();
     e.target.classList.add("hover");
   });
-
   board.addEventListener("dragleave", (e) => {
     e.target.classList.remove("hover");
   });
-
   board.addEventListener("drop", (e) => {
     const gridBoard = e.target;
     const classShip = e.dataTransfer.getData("class");
@@ -22,7 +18,6 @@ function dragShips() {
     const amountNodes = ship.childNodes.length;
     let coordinate = gridBoard.dataset.coordinate;
     e.target.classList.remove("hover");
-
     // if ships contains horizontal class 
     if (
       classShip.includes("horizontal") &&
@@ -105,5 +100,4 @@ function position(classShip, amountNodes, coordinate) {
   }
   return arrCoords.length === amountNodes;
 }
-
 export { dragShips };
