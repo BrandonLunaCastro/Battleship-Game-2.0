@@ -19,15 +19,12 @@ export default function gameLoop() {
   domMethods.createBoard(boardOne, playerOne.name);
   domMethods.createBoard(boardTwo, playerMachine.name);
 
-  const coordinateShipsMachine = machineBoard.coordinateShips;
-
   // draw and place correctly ships on the game board machine
   playerMachine.verifyCoordinate(machineBoard, 5, "carrier");
   playerMachine.verifyCoordinate(machineBoard, 4, "battleship");
   playerMachine.verifyCoordinate(machineBoard, 3, "destroyer");
   playerMachine.verifyCoordinate(machineBoard, 3, "submarine");
   playerMachine.verifyCoordinate(machineBoard, 2, "boat");
-  domMethods.drawShips(coordinateShipsMachine, playerMachine);
 
   function playGame() {
     const attackAI = () => {
