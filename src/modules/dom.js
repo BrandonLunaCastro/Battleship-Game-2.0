@@ -1,5 +1,4 @@
 function dom() {
-
   const createBoard = (reference, player) => {
     const fragment = document.createDocumentFragment();
     for (let i = 0; i < 100; i++) {
@@ -11,15 +10,6 @@ function dom() {
     reference.appendChild(fragment);
   };
 
-  const drawShips = ([...arrCoordinates], player) => {
-    for (const coord of arrCoordinates) {
-      const referenceDom = document.querySelector(
-        `.${player.name}[data-coordinate="${coord}"]`
-      );
-      referenceDom.classList.add("ship");
-    }
-  };
-
   const showBoard = (board) => {
     const options = document.querySelector(".options");
     options.classList.add("is-close");
@@ -27,9 +17,10 @@ function dom() {
   };
 
   const verifyIsSunk = (board, player) => {
+    const winner = player === "human" ? sessionStorage.getItem("name") : player;
     if (board.allSunk()) {
       document.querySelector(".modal").classList.remove("is-close");
-      document.querySelector(".winner").textContent = `The winner is player ${player}`;
+      document.querySelector(".winner").textContent = `The winner is player ${winner}`;
       document
         .getElementById("restart")
         .addEventListener("click", (event) => location.reload());
@@ -50,7 +41,7 @@ function dom() {
   };
 
   function showTurn(player) {
-    document.querySelector(".turn").textContent = `Turn of player: ${player}`;
+    document.querySelector(".turn").textContent = `Turn of ${player}`;
   }
 
   const getCoordinates = (ship) => {
@@ -90,7 +81,6 @@ function dom() {
 
   return {
     createBoard,
-    drawShips,
     stateAttack,
     showTurn,
     getCoordinates,
