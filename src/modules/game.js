@@ -43,11 +43,13 @@ export default function gameLoop() {
       const attack = machineBoard.receiveAttack(coordinate);
       
       const state = domMethods.stateAttack(e.target, attack, machineBoard, playerOne);
-      domMethods.showTurn(playerMachine.name);
-    
+      
       const currentTarget = e.currentTarget;
-      console.log(humanBoard.board);
+      if (!state){
+        domMethods.showTurn(name, true);
+      }
       if (state !== false){
+        domMethods.showTurn(playerMachine.name);
         currentTarget.classList.add("disabled");
         setTimeout(() => {
           attackAI();
@@ -76,6 +78,7 @@ export default function gameLoop() {
 
       if (domMethods.enableStartBtn() === true) {
         playGame();
+        document.querySelector(".glow").classList.remove("is-close");
         domMethods.showTurn(name);
         boardTwo.classList.add("cursor-attack");
         domMethods.showBoard(boardTwo);
