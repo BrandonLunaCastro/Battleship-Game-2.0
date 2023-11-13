@@ -1,13 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap");
-
-$color-red: rgb(172, 11, 11);
-$military-green: #006400;
-$slate: #020617;
-$background: #0c192c;
-$ship: #9098a9;
-$board: #2491ec;
-$fail: #f4f8ff;
-$night-sky: #07396b;
+@import "startWindow";
+@import "colors";
+@import "options";
 
 *,
 ::after,
@@ -25,102 +19,41 @@ body {
   flex-direction: column;
 }
 
-.turn {
-  display: block;
-  text-align: center;
-  font-size: 1.4rem;
-  color: $fail;
+.glow {
+  content: "";
+  position: relative;
+  margin: 10px auto;
+  background: linear-gradient(45deg,#e6fb04,#ff6600,#00ff66,#00ffff,
+  #ff00ff, #ff0099, #6e0dd0, #ff3300, #099fff);
+  background-size: 400%;
+  height: auto;
+  animation: animate 20s linear infinite;
+  padding: 2px;
+  border-radius: 5px;
 }
 
-.start__window {
-  background-color: $background;
-  position: absolute;
+.turn {   
   display: flex;
   justify-content: center;
-  align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-
-  .enter__player {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-self: center;
-    width: 100%;
-
-    .welcome {
-      display: block;
-      margin: 0 auto;
-      font-weight: 500;
-      white-space: nowrap;
-      border-right: 4px solid;
-      width: 29ch;
-      font-size: 3rem;
-      color: white;
-      animation:
-        typing 4s steps(29),
-        blink 0.5s infinite;
-      overflow: hidden;
-    }
-
-    @keyframes typing {
-      from {
-        width: 0;
-      }
-    }
-
-    @keyframes blink {
-      50% {
-        border-color: transparent;
-      }
-    }
-
-    .user {
-      display: inherit;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 25px;
-      position: relative;
-
-      &__name {
-        width: 40vmin;
-        height: 4vmin;
-        outline: none;
-        font-size: 1.2rem;
-        border: none;
-        box-shadow: 0px 0px 8px $fail;
-      }
-
-      #enter__game {
-        width: 18vmin;
-        height: 5vmin;
-        font-size: 2vmin;
-        border-radius: 4px;
-        background-color: $board;
-        color: $fail;
-        box-shadow: 1px 1px 18px $board;
-        border: none;
-        outline: none;
-        &:hover {
-          cursor: pointer;
-          animation: change 0.9s infinite alternate-reverse ease-in-out;
-        }
-      }
-    }
-  }
+  align-self: center;
+  font-size: 1.4rem;
+  color: $fail;
+  padding: 10px;
+  background: linear-gradient(black, rgb(45, 43, 43));  
+  border-radius: 5px;
+  backdrop-filter: blur(40px);
 }
 
-.empty__name::after{
-  content: "Please enter a valid name";
-  position: absolute;
-  background-color: red;
-  top: 30px;
-  left: 40%;
-  color: white;
-  padding: 0 10px;
+@keyframes animate {
+  0% {
+    background-position: 0 0 ;
+  }
+  50% {
+    background-position: 400% 0 ;
+  }
+  100%{
+    background-position:  0 0 ;
+  }
 }
 
 h1 {
@@ -131,10 +64,10 @@ h1 {
   color: $fail;
 }
 
-.main__window{
-  margin: 0 15px;
+.main__window {
+  margin: 10% auto;
   padding: 10px;
-  flex: 2;
+  flex: 3;
   display: flex;
   justify-content: center;
   gap: 25px;
@@ -144,7 +77,7 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 50px;
+  gap: 150px;
 }
 
 .machineBoard,
@@ -283,139 +216,8 @@ h1 {
   display: none;
 }
 
-.options {
-  border: 1px dashed #fff;
-  margin: 15px auto;
-  padding: 18px;
-  height: fit-content;
-  width: 800px;
-  background-color: $night-sky;
-  transition: all .2s ease-in;
-
-  &__buttons {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 20px;
-
-    #start__game {
-      &:hover {
-        cursor: pointer;
-        animation: jumping 0.4s infinite alternate-reverse ease-in-out;
-      }
-    }
-    #rotate {
-      &:hover {
-        cursor: pointer;
-        animation: jumping 0.4s infinite 0.1s alternate-reverse ease-in-out;
-      }
-    }
-  }
-}
-
-#start__game,
-#rotate {
-  width: 130px;
-  height: 40px;
-  background-color: $military-green;
-  color: $slate;
-  font-size: 1.2rem;
-  border: none;
-  border-radius: 4px;
-}
-
-.ships {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  padding: 20px;
-  gap: 15px;
-  width: auto;
-
-  .carrier,
-  .battleship,
-  .destroyer,
-  .submarine,
-  .boat {
-    display: grid;
-  }
-
-  @mixin gridColumns($num, $width) {
-    grid-template-columns: repeat($num, $width);
-    width: fit-content;
-  }
-  .carrier.horizontal {
-    @include gridColumns(5, 40px);
-  }
-  .battleship.horizontal {
-    @include gridColumns(4, 40px);
-  }
-  .destroyer.horizontal {
-    @include gridColumns(3, 40px);
-  }
-  .submarine.horizontal {
-    @include gridColumns(3, 40px);
-  }
-  .boat.horizontal {
-    @include gridColumns(2, 40px);
-  }
-
-  @mixin gridRows($num, $width) {
-    grid-template-rows: repeat($num, $width);
-    width: $width;
-    height: fit-content;
-  }
-
-  .carrier.vertical {
-    @include gridRows(5, 40px);
-  }
-  .battleship.vertical {
-    @include gridRows(4, 40px);
-  }
-  .destroyer.vertical {
-    @include gridRows(3, 40px);
-  }
-  .submarine.vertical {
-    @include gridRows(3, 40px);
-  }
-  .boat.vertical {
-    @include gridRows(2, 40px);
-  }
-}
-
-.hover {
-  background-color: $ship;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 1;
-    transform: scale(0);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(4);
-  }
-}
-
-@keyframes jumping {
-  0% {
-    transform: translateY(-8px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes change {
-  0% {
-    background-color: $military-green;
-    box-shadow: 1px 1px 18px $military-green;
-  }
-
-  100% {
-    background-color: $board;
-    color: $fail;
-    box-shadow: 1px 1px 18px $board;
-  }
+footer{
+  flex: 1 1 10vh; 
+  color: #f0f9ff;
+  text-align: center;
 }
