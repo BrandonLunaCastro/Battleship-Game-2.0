@@ -40,8 +40,14 @@ function dom() {
     }
   };
 
-  function showTurn(player) {
-    document.querySelector(".turn").textContent = `Turn of ${player}`;
+  function showTurn(player, repeat = false) {
+    const turnOf = document.querySelector(".turn");
+    if (repeat === true){
+      turnOf.textContent = "Already attacked try again!";
+    } else { 
+      turnOf.textContent = `Turn of ${player}`;
+    }
+    
   }
 
   const getCoordinates = (ship) => {
