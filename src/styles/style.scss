@@ -15,8 +15,12 @@
 html,
 body {
   background: $background;
+}
+
+main{
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .glow {
@@ -39,7 +43,7 @@ body {
   font-size: 1.4rem;
   color: $fail;
   padding: 10px;
-  background: linear-gradient(black, rgb(45, 43, 43));  
+  background: linear-gradient($background, rgb(44, 44, 85));  
   border-radius: 5px;
   backdrop-filter: blur(40px);
 }
@@ -62,15 +66,19 @@ h1 {
   font-size: 4rem;
   font-weight: 500;
   color: $fail;
+  text-shadow: 1px 1px 2px $fail;
 }
 
 .main__window {
-  margin: 10% auto;
+  flex-grow: 3;
+  flex-shrink: 2;
+  flex-basis: 70%;
   padding: 10px;
-  flex: 3;
   display: flex;
   justify-content: center;
   gap: 25px;
+  flex-wrap: wrap;
+  max-height: 100%;
 }
 
 .boards {
@@ -84,7 +92,7 @@ h1 {
 .humanBoard {
   display: grid;
   grid-template-columns: repeat(10, 40px);
-  background-color: $board;
+
 }
 
 .cursor-attack {
@@ -95,13 +103,17 @@ h1 {
   pointer-events: none;
 }
 
-.grid {
-  height: 40px;
-  border: 1px dashed hsla(0, 0%, 100%, 0.2);
+@mixin neonShip($color,$measurements){
+  box-shadow: inset 1px 1px $measurements $color, 1px 1px $measurements $color;
 }
 
+.grid {
+  height: 40px;
+  @include neonShip($board, 3px);
+}
 .ship {
-  background-color: $ship;
+  background-color: transparent;
+  @include neonShip($ship, 4px);
 }
 
 @mixin bowVertical {
@@ -154,7 +166,7 @@ h1 {
 }
 
 .hit::after {
-  background-color: $color-red;
+  background-color: $crimson;
 }
 
 .fail::before {
@@ -174,12 +186,13 @@ h1 {
   right: 0;
   left: 0;
   bottom: 0;
-  height: 100%;
+  height: 110%;
   width: 100%;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-grow: 2;
   z-index: 999;
 
   &__content {
@@ -193,7 +206,7 @@ h1 {
     height: 25vmin;
     background-color: #f0f9ff;
     border-radius: 5px;
-    color: $night-sky;
+    color: $background;
 
     button {
       height: 50px;
@@ -216,8 +229,3 @@ h1 {
   display: none;
 }
 
-footer{
-  flex: 1 1 10vh; 
-  color: #f0f9ff;
-  text-align: center;
-}

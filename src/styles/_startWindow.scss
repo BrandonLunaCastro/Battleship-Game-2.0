@@ -1,0 +1,107 @@
+@import "colors";
+@import "options";
+
+.start__window {
+  background-color: $background;
+  position: absolute;
+  display: grid;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  z-index: 99;
+
+  .enter__player {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-self: center;
+    align-self: flex-end;
+    width: 100%;
+
+    .welcome {
+      display: block;
+      margin: 0 auto;
+      font-weight: 500;
+      white-space: nowrap;
+      border-right: 4px solid;
+      width: 29ch;
+      font-size: 3rem;
+      color: white;
+      animation:
+        typing 4s steps(29),
+        blink 0.5s infinite;
+      overflow: hidden;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    .user {
+      display: inherit;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 25px;
+      position: relative;
+
+      &__name {
+        width: 250px;
+        height: 25px;
+        outline: none;
+        font-size: 1.2rem;
+        border: none;
+        box-shadow: 0px 0px 8px $fail;
+      }
+
+      .empty__name::after {
+        content: "Please enter a valid name";
+        position: absolute;
+        background-color: red;
+        top: 30px;
+        left: 40%;
+        color: white;
+        padding: 0 10px;
+      }
+
+      #enter__game {
+        width: 200px;
+        height: 45px;
+        font-size: 1.3rem;
+        border-radius: 4px;
+        color: $fail;
+        box-shadow: 1px 1px 18px $board;
+        border: none;
+        outline: none;
+        border: 2px solid $ship;
+        background: $background;
+        @include neonElement($board);
+        &:hover {
+          cursor: pointer;
+          animation: changeNeon 2.7s infinite alternate ease-in-out;
+        }
+      }
+    }
+  }
+  .git-hub {
+    display: flex;
+    align-self: flex-end;
+    justify-self: center;
+    align-items: center;
+    gap: 20px;
+    color: $fail;
+    img {
+      width: 3rem;
+      max-height: 3rem;
+    }
+  }
+}

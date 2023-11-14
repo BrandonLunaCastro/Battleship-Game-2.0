@@ -1,0 +1,152 @@
+@import "colors";
+
+@mixin neonElement($color){
+  box-shadow: inset 1px 1px 14px $color, 1px 1px 14px $color;
+  text-shadow: 0 0 5px $color, 0 0 15px $color, 0 0 35px $color,  0 0 55px $color ;
+}
+
+  @keyframes changeNeon{
+  0%{
+    @include neonElement($board);
+  }
+  25%{
+    @include neonElement($military-green);
+  }
+  50%{
+    @include neonElement($crimson);
+  }
+  75%{
+    @include neonElement($orange);
+  }
+  100%{
+    @include neonElement($color-pink);
+  }
+}
+
+.options {
+  padding: 18px;
+  height: fit-content;
+  width: 800px;
+  background: $background;
+  transition: all 0.2s ease-in;
+  border-radius:5px;
+
+  &__buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 20px;
+
+    #start__game {
+      &:hover {
+        cursor: pointer;
+        animation: changeNeon 2.6s infinite alternate ease-in-out;
+      }
+    }
+    #rotate {
+      &:hover {
+        cursor: pointer;
+        animation: changeNeon 2.6s infinite alternate ease-in-out;
+      }
+    }
+  }
+}
+
+#start__game,
+#rotate {
+  width: 130px;
+  height: 40px;
+  background-color: transparent;
+  color: $fail;
+  font-size: 1.2rem;
+  border: 2px solid $fail;
+  border-radius: 4px;
+  @include neonElement($board)
+}
+
+.ships {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 20px;
+  gap: 15px;
+  width: auto;
+
+  .carrier,
+  .battleship,
+  .destroyer,
+  .submarine,
+  .boat {
+    display: grid;
+  }
+
+  @mixin gridColumns($num, $width) {
+    grid-template-columns: repeat($num, $width);
+    width: fit-content;
+  }
+  .carrier.horizontal {
+    @include gridColumns(5, 40px);
+  }
+  .battleship.horizontal {
+    @include gridColumns(4, 40px);
+  }
+  .destroyer.horizontal {
+    @include gridColumns(3, 40px);
+  }
+  .submarine.horizontal {
+    @include gridColumns(3, 40px);
+  }
+  .boat.horizontal {
+    @include gridColumns(2, 40px);
+  }
+
+  @mixin gridRows($num, $width) {
+    grid-template-rows: repeat($num, $width);
+    width: $width;
+    height: fit-content;
+  }
+
+  .carrier.vertical {
+    @include gridRows(5, 40px);
+  }
+  .battleship.vertical {
+    @include gridRows(4, 40px);
+  }
+  .destroyer.vertical {
+    @include gridRows(3, 40px);
+  }
+  .submarine.vertical {
+    @include gridRows(3, 40px);
+  }
+  .boat.vertical {
+    @include gridRows(2, 40px);
+  }
+}
+
+.hover {
+  background-color: $ship;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+
+@keyframes change {
+  0% {
+    background-color: $military-green;
+    box-shadow: 1px 1px 18px $military-green;
+  }
+
+  100% {
+    background-color: $board;
+    color: $fail;
+    box-shadow: 1px 1px 18px $board;
+  }
+}
