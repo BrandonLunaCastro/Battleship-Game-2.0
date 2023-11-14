@@ -79,6 +79,7 @@ export default function gameLoop() {
       if (domMethods.enableStartBtn() === true) {
         playGame();
         document.querySelector(".glow").classList.remove("is-close");
+        document.querySelector(".options__glows").style.display = "none";
         domMethods.showTurn(name);
         boardTwo.classList.add("cursor-attack");
         domMethods.showBoard(boardTwo);
