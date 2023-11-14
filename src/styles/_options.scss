@@ -1,24 +1,30 @@
 @import "colors";
 
-@mixin neonElement($color){
-  box-shadow: inset 1px 1px 14px $color, 1px 1px 14px $color;
-  text-shadow: 0 0 5px $color, 0 0 15px $color, 0 0 35px $color,  0 0 55px $color ;
+@mixin neonElement($color) {
+  box-shadow:
+    inset 1px 1px 14px $color,
+    1px 1px 14px $color;
+  text-shadow:
+    0 0 5px $color,
+    0 0 15px $color,
+    0 0 35px $color,
+    0 0 55px $color;
 }
 
-  @keyframes changeNeon{
-  0%{
+@keyframes changeNeon {
+  0% {
     @include neonElement($board);
   }
-  25%{
+  25% {
     @include neonElement($military-green);
   }
-  50%{
+  50% {
     @include neonElement($crimson);
   }
-  75%{
+  75% {
     @include neonElement($orange);
   }
-  100%{
+  100% {
     @include neonElement($color-pink);
   }
 }
@@ -29,7 +35,7 @@
   width: 800px;
   background: $background;
   transition: all 0.2s ease-in;
-  border-radius:5px;
+  border-radius: 5px;
 
   &__buttons {
     display: flex;
@@ -61,7 +67,7 @@
   font-size: 1.2rem;
   border: 2px solid $fail;
   border-radius: 4px;
-  @include neonElement($board)
+  @include neonElement($board);
 }
 
 .ships {

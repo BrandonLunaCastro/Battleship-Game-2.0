@@ -17,7 +17,7 @@ body {
   background: $background;
 }
 
-main{
+main {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -27,36 +27,46 @@ main{
   content: "";
   position: relative;
   margin: 10px auto;
-  background: linear-gradient(45deg,#e6fb04,#ff6600,#00ff66,#00ffff,
-  #ff00ff, #ff0099, #6e0dd0, #ff3300, #099fff);
+  background: linear-gradient(
+    45deg,
+    #e6fb04,
+    #ff6600,
+    #00ff66,
+    #00ffff,
+    #ff00ff,
+    #ff0099,
+    #6e0dd0,
+    #ff3300,
+    #099fff
+  );
   background-size: 400%;
-  height:fit-content;
+  height: fit-content;
   animation: animate 20s linear infinite;
   padding: 2px;
   border-radius: 5px;
 }
 
-.turn {   
+.turn {
   display: flex;
   justify-content: center;
   align-self: center;
   font-size: 1.4rem;
   color: $fail;
   padding: 10px;
-  background: linear-gradient($background, rgb(44, 44, 85));  
+  background: linear-gradient($background, rgb(44, 44, 85));
   border-radius: 5px;
   backdrop-filter: blur(40px);
 }
 
 @keyframes animate {
   0% {
-    background-position: 0 0 ;
+    background-position: 0 0;
   }
   50% {
-    background-position: 400% 0 ;
+    background-position: 400% 0;
   }
-  100%{
-    background-position:  0 0 ;
+  100% {
+    background-position: 0 0;
   }
 }
 
@@ -92,7 +102,6 @@ h1 {
 .humanBoard {
   display: grid;
   grid-template-columns: repeat(10, 40px);
-
 }
 
 .cursor-attack {
@@ -103,8 +112,10 @@ h1 {
   pointer-events: none;
 }
 
-@mixin neonShip($color,$measurements){
-  box-shadow: inset 1px 1px $measurements $color, 1px 1px $measurements $color;
+@mixin neonShip($color, $measurements) {
+  box-shadow:
+    inset 1px 1px $measurements $color,
+    1px 1px $measurements $color;
 }
 
 .grid {
@@ -228,4 +239,3 @@ h1 {
 .is-close {
   display: none;
 }
-
