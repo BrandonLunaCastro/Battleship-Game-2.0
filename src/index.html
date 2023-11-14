@@ -6,6 +6,7 @@
     <title>Battleship</title>
   </head>
   <body>
+  <main>
     <h1>Battleship</h1>
     <article class="start__window ">
       <div class="enter__player">
@@ -22,56 +23,63 @@
           <button type="button" id="enter__game">Enter Game</button>
         </div>
       </div>
+      <div class="git-hub">
+        <p>Design by Brandon Luna 2023</p>
+        <a href="https://github.com/BrandonLunaCastro?tab=repositories"><img src="../src/img/github-mark-white.png" alt="logo git hub" id="logo"></a>
+      </div>
     </article>
     <article class="glow is-close"> 
       <div class="turn"></d>
     </article>
-    <article class="modal is-close">
-      <div class="modal__content">
-        <h2 class="winner"></h2>
-        <button type="button" id="restart">Play again</button>
-      </div>
-    </article>
     <article class="main__window">
+      <article class="modal is-close">
+        <div class="modal__content">
+          <h2 class="winner"></h2>
+          <button type="button" id="restart">Play again</button>
+        </div>
+      </article>
       <article class="boards">
         <section class="humanBoard"></section>
         <section class="machineBoard is-close"></section>
       </article>
-      <article class="options">
-        <div class="options__buttons">
-          <button type="button" id="start__game">Start Game</button>
-          <button type="button" id="rotate">Rotate</button>
-        </div>
-        <section class="ships">
-          <div class="carrier vertical draggable" draggable="true">
-            <div class="grid human ship carrier bow__vertical"></div>
-            <div class="grid human ship carrier"></div>
-            <div class="grid human ship carrier"></div>
-            <div class="grid human ship carrier"></div>
-            <div class="grid human ship carrier stern__vertical"></div>
+      <article class="options__glows glow">
+        <article class="options">
+          <div class="options__buttons">
+            <button type="button" id="start__game">Start Game</button>
+            <button type="button" id="rotate">Rotate</button>
           </div>
-          <div class="battleship vertical draggable" draggable="true">
-            <div class="grid human ship battleship bow__vertical"></div>
-            <div class="grid human ship battleship"></div>
-            <div class="grid human ship battleship"></div>
-            <div class="grid human ship battleship stern__vertical"></div>
-          </div>
-          <div class="destroyer vertical draggable" draggable="true">
-            <div class="grid human ship destroyer bow__vertical"></div>
-            <div class="grid human ship destroyer"></div>
-            <div class="grid human ship destroyer stern__vertical"></div>
-          </div>
-          <div class="submarine vertical draggable" draggable="true">
-            <div class="grid human ship submarine bow__vertical"></div>
-            <div class="grid human ship submarine"></div>
-            <div class="grid human ship submarine stern__vertical"></div>
-          </div>
-          <div class="boat vertical draggable" draggable="true">
-            <div class="grid human ship boat bow__vertical"></div>
-            <div class="grid human ship boat stern__vertical"></div>
-          </div>
-        </section>
+          <section class="ships">
+            <div class="carrier vertical draggable" draggable="true">
+              <div class="grid human ship carrier bow__vertical"></div>
+              <div class="grid human ship carrier"></div>
+              <div class="grid human ship carrier"></div>
+              <div class="grid human ship carrier"></div>
+              <div class="grid human ship carrier stern__vertical"></div>
+            </div>
+            <div class="battleship vertical draggable" draggable="true">
+              <div class="grid human ship battleship bow__vertical"></div>
+              <div class="grid human ship battleship"></div>
+              <div class="grid human ship battleship"></div>
+              <div class="grid human ship battleship stern__vertical"></div>
+            </div>
+            <div class="destroyer vertical draggable" draggable="true">
+              <div class="grid human ship destroyer bow__vertical"></div>
+              <div class="grid human ship destroyer"></div>
+              <div class="grid human ship destroyer stern__vertical"></div>
+            </div>
+            <div class="submarine vertical draggable" draggable="true">
+              <div class="grid human ship submarine bow__vertical"></div>
+              <div class="grid human ship submarine"></div>
+              <div class="grid human ship submarine stern__vertical"></div>
+            </div>
+            <div class="boat vertical draggable" draggable="true">
+              <div class="grid human ship boat bow__vertical"></div>
+              <div class="grid human ship boat stern__vertical"></div>
+            </div>
+          </section>
+        </article>
       </article>
     </article>
+  </main>
   </body>
 </html>
